@@ -12,12 +12,6 @@ class Glib < Formula
 
   fails_with_llvm "Undefined symbol errors while linking" unless MacOS.lion?
 
-  # Lion and Snow Leopard don't have a 64 bit version of the iconv_open
-  # function. The fact that Lion still doesn't is ridiculous. But we're as
-  # much to blame. Nobody reported the bug FFS. And I'm still not going to
-  # because I'm in a hurry here.
-  depends_on 'libiconv'
-
   def patches
     mp = "https://svn.macports.org/repository/macports/trunk/dports/devel/glib2/files/"
     {
@@ -28,7 +22,8 @@ class Glib < Formula
         mp+"patch-gi18n.h.diff",
         mp+"patch-gio_xdgmime_xdgmime.c.diff",
         mp+"patch-gio_gdbusprivate.c.diff"
-      ]
+      ],
+      :p1 => [ DATA ]
     }
   end
 
@@ -46,8 +41,7 @@ class Glib < Formula
     ENV.enable_warnings
 
     args = ["--disable-dependency-tracking", "--disable-rebuilds",
-            "--prefix=#{prefix}",
-            "--with-libiconv=gnu"]
+            "--prefix=#{prefix}"]
 
     args << "--disable-debug" unless build_tests?
 
@@ -90,3 +84,17 @@ class Glib < Formula
     (share+'gtk-doc').rmtree
   end
 end
+
+__END__
+diff --git a/glib/gconvert.c b/glib/gconvert.c
+index b363bca..9924c6c 100644
+--- a/glib/gconvert.c
++++ b/glib/gconvert.c
+@@ -62,7 +62,6 @@
+ #error GNU libiconv in use but included iconv.h not from libiconv
+ #endif
+ #if !defined(USE_LIBICONV_GNU) && defined (_LIBICONV_H)
+-#error GNU libiconv not in use but included iconv.h is from libiconv
+ #endif
+ 
+ 
