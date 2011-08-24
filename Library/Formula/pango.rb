@@ -16,7 +16,7 @@ class Pango < Formula
   end
 
   def install
-    system "./configure", "--prefix=#{prefix}", "--with-x"
+    system "./configure", "--prefix=#{prefix}", "--without-x"
     system "make install"
   end
 end
