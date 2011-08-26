@@ -4,6 +4,7 @@ class Pango < Formula
   homepage 'http://www.pango.org/'
   url 'http://download.gnome.org/sources/pango/1.29/pango-1.29.3.tar.xz'
   sha256 'b0da90cdac7f384a1c678b9467d00b6b8167f12044f9db089bf359f88644e86e'
+  version '1.29.3'
 
   depends_on 'pkg-config' => :build
   depends_on 'glib'
