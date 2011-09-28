@@ -1,9 +1,9 @@
 require 'formula'
 
 class Autojump < Formula
-  url 'https://github.com/downloads/joelthelion/autojump/autojump_v16.tar.gz'
+  url 'https://github.com/downloads/joelthelion/autojump/autojump_v17.tar.gz'
   homepage 'https://github.com/joelthelion/autojump/wiki'
-  md5 '2ac11b916911fd35e0da3f5cbee45f14'
+  md5 '38f9cf32fc6442d2db82a64086811a2b'
 
   head 'https://github.com/joelthelion/autojump.git'
 
