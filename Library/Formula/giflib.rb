@@ -5,7 +5,14 @@ class Giflib < Formula
   homepage 'http://giflib.sourceforge.net/'
   md5 '7125644155ae6ad33dbc9fc15a14735f'
 
+  def options
+    [
+      ["--universal", "Builds a universal binary"]
+    ]
+  end
+
   def install
+    ENV.universal_binary if ARGV.build_universal?
     system "./configure", "--prefix=#{prefix}", "--disable-debug", "--disable-dependency-tracking"
     system "make install"
   end
